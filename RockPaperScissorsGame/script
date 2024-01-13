@@ -1,0 +1,99 @@
+/*the button values*/
+let buttonValue=document.querySelectorAll('.buttons');
+let buttonVal;
+
+let main=document.querySelector('.main');
+
+let userChoice=document.querySelector('.yourChoice');
+
+buttonValue.forEach(function (button){
+    button.addEventListener('click',e=>{
+         buttonVal=e.target.id;
+         if(buttonVal==='rock'){
+             userChoice.appendChild(rockImgUser);
+             userChoice.id='Rock';
+         }
+         if(buttonVal==='paper'){
+             userChoice.appendChild(paperImgUser);
+             userChoice.id='Paper';
+         }
+         if(buttonVal==='scissors'){
+             userChoice.appendChild(scissorsImgUser);
+             userChoice.id='Scissors';
+         }
+         document.querySelector('.result').style.display='grid';
+        generateComputerChoice();
+        main.remove();
+        button.remove();
+        console.log(userChoice.id);
+        console.log(computerChoice.id);
+        setTimeout(result,3000);
+        /*result();*/
+    });
+});
+
+/*inserting the image elements*/
+let rockImgUser=document.createElement("img");
+let rockImgComputer=document.createElement("img");
+let paperImgUser=document.createElement("img");
+let paperImgComputer=document.createElement("img");
+let scissorsImgUser=document.createElement("img");
+let scissorsImgComputer=document.createElement("img");
+
+rockImgUser.src='rock.png';
+rockImgComputer.src='rock.png';
+paperImgUser.src='paper.png';
+paperImgComputer.src='paper.png';
+scissorsImgUser.src='scissors.png';
+scissorsImgComputer.src='scissors.png';
+
+/*generating random computer choice*/
+let computerChoice=document.querySelector('.computerChoice');
+const generateComputerChoice=()=>{
+    let randomNum=Math.floor(Math.random()*3)+1;
+    if(randomNum===1){
+        computerChoice.appendChild(rockImgComputer);
+        computerChoice.id='Rock';
+    }
+    if(randomNum===2){
+        computerChoice.appendChild(paperImgComputer);
+        computerChoice.id='Paper';
+    }
+    if(randomNum===3){
+        computerChoice.appendChild(scissorsImgComputer);
+        computerChoice.id='Scissors';
+    }
+}
+
+//winner alert
+const result=()=>{
+    if(computerChoice.id==='Rock' && userChoice.id==='Rock'){
+        window.alert("It's a tie");
+    }
+    if(computerChoice.id==='Rock' && userChoice.id==='Paper'){
+        window.alert('You win');
+    }
+    if(computerChoice.id==='Rock' && userChoice.id==='Scissors'){
+        window.alert('You lose');
+    }
+    if(computerChoice.id==='Paper' && userChoice.id==='Paper'){
+        window.alert("It's a tie");
+    }
+    if(computerChoice.id==='Paper' && userChoice.id==='Rock'){
+        window.alert('You lose');
+    }
+    if(computerChoice.id==='Paper' && userChoice.id==='Scissors'){
+        window.alert('You win');
+    }
+    if(computerChoice.id==='Scissors' && userChoice.id==='Scissors'){
+        window.alert("It's a tie");
+    }
+    if(computerChoice.id==='Scissors' && userChoice.id==='Rock'){
+        window.alert('You win');
+    }
+    if(computerChoice.id==='Scissors' && userChoice.id==='Paper'){
+        window.alert('You lose');
+    }
+    location.reload();
+}
+
